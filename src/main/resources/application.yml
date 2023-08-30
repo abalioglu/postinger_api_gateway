@@ -1,0 +1,55 @@
+server:
+  port: 8082
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+spring:
+  application:
+    name: postinger-api-gateway
+  main:
+    web-application-type: reactive
+  cloud:
+    gateway:
+      routes:
+        - id: postinger-identity-service
+          uri: http://localhost:8090
+          predicates:
+            - Path=/user/**
+        - id: postinger-identity-service
+          uri: http://localhost:8090
+          predicates:
+            - Path=/role/**
+        - id: postinger-identity-service
+          uri: http://localhost:8090
+          predicates:
+            - Path=/authority/**
+        - id: postinger-post-service
+          uri: http://localhost:8080
+          predicates:
+            - Path=/posts/**
+        - id: postinger-comment-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/comments/**
+        - id: postinger-follow-service
+          uri: http://localhost:8083
+          predicates:
+            - Path=/follow/**
+        - id: postinger-payment-service
+          uri: http://localhost:8084
+          predicates:
+            - Path=/wallet/**
+        - id: postinger-payment-service
+          uri: http://localhost:8084
+          predicates:
+            - Path=/deposit/**
+        - id: postinger-payment-service
+          uri: http://localhost:8084
+          predicates:
+            - Path=/withdrawal/**
+        - id: postinger-payment-service
+          uri: http://localhost:8084
+          predicates:
+            - Path=/donation/**
+
+
